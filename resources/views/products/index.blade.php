@@ -3,6 +3,11 @@
 
 @section('content')
 
+<style>
+.max{width:100%;height:auto;}
+.min{width:100px;height:auto;}
+</style>
+
 <section id="breadcrumbRow" class="row">
         <h2>產品</h2>
         <div class="row pageTitle m0">
@@ -76,7 +81,7 @@
                 <div class="col-sm-3 product">
                     <div class="productInner row m0">
                         <div class="row m0 imgHov">
-                            <img src="{{ $product->image_url }}" alt="">
+                            <img class='img' src="{{ $product->image_url }}" alt="">
                             <div class="row m0 hovArea">
                                 <div class="row m0 icons">
                                     <ul class="list-inline">
@@ -95,10 +100,13 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row m0 proName"><a href="{{ route('products.show', ['product' => $product->id]) }}">{{ $product->title }}</a></div>
+
                         <div class="row m0 proPrice"><i class="fa fa-usd"></i>{{ $product->price }}</div>
                         <div class="row m0 proBuyBtn">
-                            <button class="btn btn-primary btn-add-to-cart">新增至購物車</button>
+                            {{--<button class="btn btn-primary btn-add-to-cart">新增至購物車</button>--}}
                             {{-- 商品數量預設為1個 --}}
                             <div class="cart_amount"><input type="hidden" class="form-control form-control-sm" value="1"></div>
                         </div>
@@ -179,8 +187,10 @@
       $('.search-form').submit();
     });
 
+
+
     // 加入购物车按钮点击事件
-      $('.btn-add-to-cart').click(function () {
+     /* $('.btn-add-to-cart').click(function () {
 
         // 请求加入购物车接口
         axios.post('{{ route('cart.add') }}', {
@@ -215,7 +225,8 @@
               swal('系統發生錯誤', '', 'error');
             }
           })
-      });
+      });*/
+
   })
 
 
