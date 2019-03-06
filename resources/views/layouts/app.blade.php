@@ -22,8 +22,8 @@
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
 
-    <link rel="stylesheet" type="text/css" href="vendor/laravel-admin/lightbox/css/lightbox.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="vendor/laravel-admin/flexslider/flexslider.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/laravel-admin/lightbox/css/lightbox.css') }}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/laravel-admin/flexslider/flexslider.css') }}" media="screen" />
 
     <!--Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Montserrat:400,700' rel='stylesheet' type='text/css'>

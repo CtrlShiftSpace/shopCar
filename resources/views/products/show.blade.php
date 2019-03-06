@@ -43,25 +43,29 @@
                 <div class="col-sm-5">
                     <div class="row m0">
                         <h4 class="heading">{{ $product->title }}</h4>
-                        <h3 class="heading price"><del>$580</del>$420</h3>
+                        <h3 class="heading price"><del>$580</del>${{ $product->price }}</h3>
                         <div class="row m0 starsRow">
-                            <div class="stars fleft">
+                            <div class="rating stars fleft" title="評分 {{ $product->rating }}">評分 <span class="count">{{ str_repeat('◆', floor($product->rating)) }}{{ str_repeat('◇', 5 - floor($product->rating)) }}</span></div>
+                            {{-- <div class="stars fleft">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-half-empty"></i>
-                            </div>
+                            </div>--}}
                             <div class="fleft">
-                                5 Review(s) <span>|</span> <a href="#">Add Your Review</a>
+                                5 則評論 <span>|</span> <a href="#">Add Your Review</a>
                             </div>
                         </div>
+
+                        {{--<div class="sold_count">累積銷量 <span class="count">{{ $product->sold_count }}</span></div>
+          <div class="review_count">累積評價 <span class="count">{{ $product->review_count }}</span></div>--}}
                         <div class="row descList m0">
                             <dl class="dl-horizontal">
-                                <dt>manufacturer :</dt>
-                                <dd>Tartaan & Co</dd>
-                                <dt>availability :</dt>
-                                <dd>In Stock 20 Item(s)</dd>
+                                <dt>累積銷量 :</dt>
+                                <dd>{{ $product->sold_count }}</dd>
+                                <dt>累積評價 :</dt>
+                                <dd>{{ $product->review_count }}</dd>
                                 <dt>product code :</dt>
                                 <dd>Xuo15</dd>
                             </dl>
@@ -69,8 +73,26 @@
                         <div class="row m0 shortDesc">
                             <p class="m0">Rustic, natural, often made of bark-covered logs or simple planks. Look for junk shop finds when in the country (for authenticity), or purchase hand-made new versions.</p>
                         </div>
+
+                        <div class="skus">
+                            <label>選擇</label>
+                                <div class="btn-group btn-group-toggle " data-toggle="buttons">
+                                @foreach($product->skus as $sku)
+                                  <label
+                                      class="btn sku-btn"
+                                      data-price="{{ $sku->price }}"
+                                      data-stock="{{ $sku->stock }}"
+                                      data-toggle="tooltip"
+                                      title="{{ $sku->description }}"
+                                      data-placement="bottom">
+                                    <input type="radio" name="skus" autocomplete="off" value="{{ $sku->id }}"> {{ $sku->title }}
+                                  </label>
+                                @endforeach
+                              </div>
+                            </div>
+
                         <div class="row m0 colorSelect">
-                            <h5 class="heading proAttr">Color :</h5>
+                            <h5 class="heading proAttr">顏色 :</h5>
                             <input type="radio" id="cl1" name="proColor" checked>
                             <label for="cl1"><span></span></label>
                             <input type="radio" id="cl2" name="proColor">
@@ -85,7 +107,7 @@
                             <label for="cl6"><span></span></label>
                         </div>
                         <div class="row m0">
-                            <h5 class="heading proAttr">Size :</h5>
+                            <h5 class="heading proAttr">大小 :</h5>
                             <select class="selectpicker sizeSelect">
                                 <option value="queen">queen</option>
                                 <option value="red">red</option>
@@ -100,18 +122,31 @@
                                 <li><a href="#"><img src="images/icons/email.png" alt="">Email to a Friend</a></li>
                             </ul>
                         </div>
+
+                        {{--<div class="cart_amount"><label>数量</label><input type="text" class="form-control form-control-sm" value="1"><span>件</span><span class="stock"></span></div>--}}
+
                         <div class="row m0 qtyAtc">
                             <div class="fleft quantity">
-                                <div class="fleft">Qty <span>=</span></div>
+                                <div class="fleft">數量 <span>=</span></div>
                                 <div class="input-group spinner">
-                                    <input type="text" class="form-control" value="2">
+                                    <div class="cart_amount">
+                                        <input type="text" class="form-control" value="2">
+                                    </div>
                                     <div class="input-group-btn-vertical">
                                         <button class="btn btn-default"><i class="fa fa-angle-up"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-angle-down"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            <button class="fleft btn btn-default"><img src="images/icons/cart3.png" alt=""> add to cart</button>
+                            @if($favored)
+                            <button class="btn btn-danger btn-disfavor">取消收藏</button>
+                            @else
+                            <button class="btn btn-success btn-favor">❤ 收藏</button>
+                            @endif
+                            <button class="btn btn-primary btn-add-to-cart">加入購物車</button>
+
+                            {{-- <button class="fleft btn btn-default"><img src="images/icons/cart3.png" alt=""> add to cart</button> --}}
+
                         </div>
                     </div>
                 </div>
@@ -133,7 +168,7 @@
                         <div class="fleft img"><img src="{{ asset('images/product/tab-desc.png') }}" alt=""></div>
                         <div class="fleft desc">
                             <h5 class="heading">商品詳情</h5>
-                            <p>Dining furniture designs are plain in appearance, stripped to bare essentials (few turnings, no decorations), featuring natural materials; no ornamentation; strong emphasis on function.Dining furniture designs are plain in appearance, stripped to bare essentials (few turnings, no decorations), featuring natural materials; no ornamentation; strong emphasis on function.</p>
+                            <p>{!! $product->description !!}</p>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane row m0" id="review">
@@ -314,7 +349,7 @@
     </section>
 
 
-
+<div class="container">
 <div class="row">
 <div class="col-lg-10 offset-lg-1">
 <div class="card">
@@ -403,6 +438,7 @@
 </div>
 </div>
 </div>
+</div>
 @endsection
 
 @section('scriptsAfterJs')
@@ -432,7 +468,7 @@
               swal(error.response.data.msg, '', 'error');
             }  else {
               // 其他情况应该是系统挂了
-              swal('系统错误', '', 'error');
+              swal('系統錯誤', '', 'error');
             }
           });
       });
@@ -456,7 +492,7 @@
           amount: $('.cart_amount input').val(),
         })
           .then(function () { // 请求成功执行此回调
-            swal('加入购物车成功', '', 'success')
+            swal('加入購物車成功', '', 'success')
               .then(function() {
                 location.href = '{{ route('cart.index') }}';
               });
@@ -464,7 +500,7 @@
             if (error.response.status === 401) {
 
               // http 状态码为 401 代表用户未登陆
-              swal('请先登录', '', 'error');
+              swal('請先登入', '', 'error');
 
             } else if (error.response.status === 422) {
 
@@ -480,7 +516,7 @@
             } else {
 
               // 其他情况应该是系统挂了
-              swal('系统错误', '', 'error');
+              swal('系統錯誤', '', 'error');
             }
           })
       });
