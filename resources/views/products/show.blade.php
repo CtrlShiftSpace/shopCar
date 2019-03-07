@@ -22,7 +22,7 @@
                 <div class="col-sm-7">
                     <div class="row m0 flexslider" id="productImageSlider">
                         <ul class="slides">
-                            <li><img src="{{ asset('images/product/single/1.png') }}" alt=""></li>
+                            <li><img src="{{ $product->image_url }}" alt=""></li>
                             <li><img src="{{ asset('images/product/single/1.png') }}" alt=""></li>
                             <li><img src="{{ asset('images/product/single/1.png') }}" alt=""></li>
                             <li><img src="{{ asset('images/product/single/1.png') }}" alt=""></li>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="row m0 flexslider" id="productImageSliderNav">
                         <ul class="slides">
-                            <li><img class="img-thumbnail" src="{{ asset('images/product/single/l1.png') }}" alt=""></li>
+                            <li><img class="img-thumbnail" src="{{ $product->image_url }}" alt=""></li>
                             <li><img class="img-thumbnail" src="{{ asset('images/product/single/l2.png') }}" alt=""></li>
                             <li><img class="img-thumbnail" src="{{ asset('images/product/single/l3.png') }}" alt=""></li>
                             <li><img class="img-thumbnail" src="{{ asset('images/product/single/l4.png') }}" alt=""></li>
@@ -43,9 +43,12 @@
                 <div class="col-sm-5">
                     <div class="row m0">
                         <h4 class="heading">{{ $product->title }}</h4>
-                        <h3 class="heading price"><del>$580</del>${{ $product->price }}</h3>
+
+                        {{-- <div class="price"><label>价格</label><em>￥</em><span>{{ $product->price }}</span></div> --}}
+
+                        <h3 class="heading price"><del>$580</del>$<span>{{ $product->price }}</span></h3>
                         <div class="row m0 starsRow">
-                            <div class="rating stars fleft" title="評分 {{ $product->rating }}">評分 <span class="count">{{ str_repeat('◆', floor($product->rating)) }}{{ str_repeat('◇', 5 - floor($product->rating)) }}</span></div>
+                            <div class="rating stars fleft" title="評分 {{ $product->rating }}">評分 <span class="count" style="font-size:18px;">{{ str_repeat('◆', floor($product->rating)) }}{{ str_repeat('◇', 5 - floor($product->rating)) }}</span></div>
                             {{-- <div class="stars fleft">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -62,12 +65,12 @@
           <div class="review_count">累積評價 <span class="count">{{ $product->review_count }}</span></div>--}}
                         <div class="row descList m0">
                             <dl class="dl-horizontal">
+                                <dt>庫存量 :</dt>
+                                <dd><span class="stock"></span></dd>
                                 <dt>累積銷量 :</dt>
                                 <dd>{{ $product->sold_count }}</dd>
                                 <dt>累積評價 :</dt>
                                 <dd>{{ $product->review_count }}</dd>
-                                <dt>product code :</dt>
-                                <dd>Xuo15</dd>
                             </dl>
                         </div>
                         <div class="row m0 shortDesc">
@@ -76,7 +79,7 @@
 
                         <div class="skus">
                             <label>選擇</label>
-                                <div class="btn-group btn-group-toggle " data-toggle="buttons">
+                                <div class="row m0 colorSelect " data-toggle="buttons">
                                 @foreach($product->skus as $sku)
                                   <label
                                       class="btn sku-btn"
@@ -85,13 +88,13 @@
                                       data-toggle="tooltip"
                                       title="{{ $sku->description }}"
                                       data-placement="bottom">
-                                    <input type="radio" name="skus" autocomplete="off" value="{{ $sku->id }}"> {{ $sku->title }}
+                                        <input type="radio" name="skus" autocomplete="off" value="{{ $sku->id }}"> {{ $sku->title }}
                                   </label>
                                 @endforeach
                               </div>
                             </div>
 
-                        <div class="row m0 colorSelect">
+                        {{--<div class="row m0 colorSelect">
                             <h5 class="heading proAttr">顏色 :</h5>
                             <input type="radio" id="cl1" name="proColor" checked>
                             <label for="cl1"><span></span></label>
@@ -105,7 +108,7 @@
                             <label for="cl5"><span></span></label>
                             <input type="radio" id="cl6" name="proColor">
                             <label for="cl6"><span></span></label>
-                        </div>
+                        </div>--}}
                         <div class="row m0">
                             <h5 class="heading proAttr">大小 :</h5>
                             <select class="selectpicker sizeSelect">
@@ -173,7 +176,35 @@
                     </div>
                     <div role="tabpanel" class="tab-pane row m0" id="review">
                         <div class="row m0 reviewCount">1 review for comfortable dining table</div>
-                        <div class="row m0 reviewBody">
+
+                        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <td>用户</td>
+              <td>商品</td>
+              <td>评分</td>
+              <td>评价</td>
+              <td>时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($reviews as $review)
+              <tr>
+                <td>{{ $review->order->user->name }}</td>
+                <td>{{ $review->productSku->title }}</td>
+                <td>{{ str_repeat('◆', $review->rating) }}{{ str_repeat('◇', 5 - $review->rating) }}</td>
+                <td>{{ $review->review }}</td>
+                <td>{{ $review->reviewed_at->format('Y-m-d H:i') }}</td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+          <!-- 评论列表结束 -->
+
+
+
+
+                        {{--<div class="row m0 reviewBody">
                             <span class="bold">4</span> out of 5 <br>
                             <span class="bold">K Admas</span> - March 10, 2014
                             <p class="m0">Amazing Product!</p>
@@ -210,6 +241,7 @@
                                 </div>
                             </form>
                         </div>
+                        --}}
                     </div>
                     <div role="tabpanel" class="tab-pane row m0" id="additionInfo">
                         <div class="row m0 additionInfoRow">
@@ -348,7 +380,7 @@
         </div>
     </section>
 
-
+{{--
 <div class="container">
 <div class="row">
 <div class="col-lg-10 offset-lg-1">
@@ -439,6 +471,8 @@
 </div>
 </div>
 </div>
+
+--}}
 @endsection
 
 @section('scriptsAfterJs')
@@ -446,8 +480,9 @@
     $(document).ready(function () {
       $('[data-toggle="tooltip"]').tooltip({trigger: 'hover'});
       $('.sku-btn').click(function () {
-        $('.product-info .price span').text($(this).data('price'));
-        $('.product-info .stock').text('库存：' + $(this).data('stock') + '件');
+        //修改商品數量
+        $('.price span').text($(this).data('price'));
+        $('.descList .stock').text($(this).data('stock') + '件');
       });
 
       // 监听收藏按钮的点击事件

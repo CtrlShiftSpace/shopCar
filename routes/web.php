@@ -14,6 +14,7 @@
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
 Route::get('products', 'ProductsController@index')->name('products.index');
+Route::get('abouts', 'AboutController@index')->name('abouts.index');
 
 Auth::routes(['verify' => true]);
 

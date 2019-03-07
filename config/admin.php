@@ -5,17 +5,17 @@ return [
     /*
      * 站点标题
      */
-    'name' => 'Laravel Shop',
+    'name' => '電商管理後台',
 
     /*
      * 页面顶部 Logo
      */
-    'logo' => '<b>Laravel</b> Shop',
+    'logo' => '<b>電商 後台</b>',
 
     /*
      * 页面顶部小 Logo
      */
-    'logo-mini' => '<b>LS</b>',
+    'logo-mini' => '<b>電商</b>',
 
     /*
      * 路由配置
@@ -183,6 +183,10 @@ return [
      * 扩展设置.
      */
     'extensions' => [
+        'material-ui' => [
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true
+        ]
 
     ],
 ];

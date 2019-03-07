@@ -132,11 +132,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">首頁</a></li>
-                    <li><a href="about.html">關於我們</a></li>
+                    <li><a href="{{ url('/') }}">首頁</a></li>
+                    <li><a href="{{ url('/abouts') }}">關於我們</a></li>
                     <li><a href="contact.html">聯絡我們</a></li>
-                    <li><a href="product.html">產品</a></li>
-                    <li><a href="single-product.html">Single Product</a></li>
+                    <li><a href="{{ url('/products') }}">產品</a></li>
+                    {{-- <li><a href="single-product.html">Single Product</a></li> --}}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
