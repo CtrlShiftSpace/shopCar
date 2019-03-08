@@ -11,6 +11,12 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
+        /*$product->insert([
+            'name' => str_random(10),
+            'email' => str_random(10).'@gmail.com',
+            'password' => bcrypt('secret'),
+        ]);*/
+
         // 创建 30 个商品
         $products = factory(\App\Models\Product::class, 30)->create();
         foreach ($products as $product) {

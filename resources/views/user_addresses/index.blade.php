@@ -2,8 +2,10 @@
 @section('title', '收货地址列表')
 
 @section('content')
+<section class="row contentRowPad">
+    <div class="container">
   <div class="row">
-    <div class="col-md-10 offset-md-1">
+    <div class="col-md-12">
       <div class="card panel-default">
         <div class="card-header">
           收货地址列表
@@ -40,6 +42,8 @@
       </div>
     </div>
   </div>
+</div>
+</section>
 @endsection
 
 @section('scriptsAfterJs')

@@ -92,11 +92,12 @@
                                 </div>
                                 <div class="row m0 proType"><a href="#">{{ $product->title }}</a></div>
                                 <div class="row m0 proRating">
+                                    <p style="font-size: large;">{{ str_repeat('◆', floor($product->rating)) }}{{ str_repeat('◇', 5 - floor($product->rating)) }}</p>
+                                    {{--<i class="fa fa-star-o"></i>
                                     <i class="fa fa-star-o"></i>
                                     <i class="fa fa-star-o"></i>
                                     <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>--}}
                                 </div>
                             </div>
                         </div>

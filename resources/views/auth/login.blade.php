@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+<section class="row contentRowPad">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -70,4 +73,5 @@
         </div>
     </div>
 </div>
+</section>
 @endsection

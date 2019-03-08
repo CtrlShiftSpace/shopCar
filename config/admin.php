@@ -37,7 +37,7 @@ return [
     /*
      * Laravel-Admin 页面标题
      */
-    'title' => 'Laravel Shop 管理后台',
+    'title' => '電商管理後台',
 
     /*
      * 是否使用 https
@@ -136,7 +136,7 @@ return [
      * 页面风格
      * @see https://adminlte.io/docs/2.4/layout
      */
-    'skin' => 'skin-blue-light',
+    'skin' => 'skin-green-light',
 
     /*
     |---------------------------------------------------------|

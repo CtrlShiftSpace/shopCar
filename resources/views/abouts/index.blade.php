@@ -4,13 +4,13 @@
 @section('content')
 
 <section id="breadcrumbRow" class="row">
-        <h2>About us</h2>
+        <h2>關於我們</h2>
         <div class="row pageTitle m0">
             <div class="container">
-                <h4 class="fleft">About us</h4>
+                <h4 class="fleft">關於我們</h4>
                 <ul class="breadcrumb fright">
-                    <li><a href="index.html">home</a></li>
-                    <li class="active">about us</li>
+                    <li><a href="index.html">首頁</a></li>
+                    <li class="active">關於我們</li>
                 </ul>
             </div>
         </div>
